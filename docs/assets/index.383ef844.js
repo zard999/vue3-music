@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{o,B as r}from"./vendor.d4739ed8.js";const t={name:"Discover"};function c(n,s,a,i,p,_){return o(),r("div",null,"discover")}var m=e(t,[["render",c]]);export{m as default};
