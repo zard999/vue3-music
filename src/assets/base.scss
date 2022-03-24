@@ -35,9 +35,10 @@
   }
 }
 
-html, body {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+html,
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   @apply text-slate-700 bg-white;
   @apply dark:bg-[#1e1e1f] dark:text-slate-100;
 }
@@ -62,4 +63,13 @@ html, body {
 
 .el-tabs__header {
   @apply m-0;
+}
+
+.ellipsis-two {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 700;
+  line-height: 18px;
 }

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 11:13:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 11:33:20
+ * @LastEditTime: 2022-03-24 10:47:20
  * @FilePath: \music-item\vite.config.ts
  * @Description: vite配置文件
  *
@@ -39,6 +39,15 @@ export default defineConfig({
   server: {
     port: 4000, // 服务端口号
     open: true, // 服务启动时是否自动打开浏览器
-    cors: true, // 允许跨域
+    // cors: true, // 允许跨域
+    proxy: {
+      // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
+      // 正则表达式写法
+      "^/api": {
+        target: "https://nicemusic-api.lxhcool.cn/", // 后端服务实际地址
+        changeOrigin: true, //开启代理
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });

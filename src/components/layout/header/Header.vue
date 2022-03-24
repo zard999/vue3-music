@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:09:36
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 16:06:13
+ * @LastEditTime: 2022-03-24 10:54:03
  * @FilePath: \music-item\src\components\layout\header\Header.vue
  * @Description: 头部导航栏
  * 
@@ -10,37 +10,51 @@
 -->
 <template>
   <div class="flex items-center drag h-14">
-    <div class="flex items-center pl-5">
+    <div class="flex items-center">
       <div class="logo w-36 flex items-center mr-7 h-14">
-        <router-link :to="{ name: 'home' }"></router-link>
+        <div class="img" @click="toHome()"></div>
       </div>
       <IconPark
         :icon="Left"
         :size="iconSize"
         :stroke-width="2"
         class="icon-button"
-        @click="router.back()"
+        @click="router.back(1)"
       />
       <IconPark
         :icon="Right"
         :size="iconSize"
         :stroke-width="2"
         class="icon-button"
+        @click="router.go(1)"
       />
     </div>
 
-    <div class="nav flex-row">
+    <!-- <div class="nav flex-row">
       <div
         class="nav-Item"
         :class="{ active: currentIndex == index }"
         v-for="(item, index) in navList.arrList"
-        :key="item"
-        @click="currentIndex = index"
+        :key="item.name"
+        @click="handlerRouter(item.name, index)"
       >
-        {{ item }}
+        {{ item.value }}
       </div>
-    </div>
+    </div> -->
 
+    <el-tabs
+      v-model="currentMenu"
+      @tab-click="onTabClick"
+      class="demo-tabs flex flex-1 justify-center"
+    >
+      <el-tab-pane
+        v-for="menu in menus"
+        :key="menu.name"
+        :label="menu.label"
+        :name="menu.name"
+        class="text-main"
+      />
+    </el-tabs>
     <div class="flex items-center mr-5">
       <div class="search no-drag ml-2 mr-4">
         <SearchPop />
@@ -61,20 +75,21 @@ import {
 } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
 import UserInfo from "@/components/layout/header/UserInfo.vue";
+import { useMusicMenu } from "@/components/layout/header/MusicController";
 
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 
-const activeName = ref("first");
+const iconSize = 22;
+const router = useRouter();
 
-const navList = reactive({
-  arrList: ["发现音乐", "排行榜", "歌单", "歌手", "视频", "MV"],
-});
+// tabBar
+const { menus, currentMenu, onTabClick } = useMusicMenu();
 
-let currentIndex = ref("0");
-
-const handleClick = (tab: string, event: Event) => {
-  console.log(tab, event);
-};
+// 点击logo回到home
+function toHome() {
+  router.push({ name: "discover" });
+}
 </script>
 
 <style lang="scss" scoped>
@@ -96,7 +111,7 @@ const handleClick = (tab: string, event: Event) => {
   align-items: center;
   margin-right: 30px;
 
-  a {
+  .img {
     width: 100%;
     display: block;
     height: 64px;
@@ -104,10 +119,7 @@ const handleClick = (tab: string, event: Event) => {
     background-repeat: no-repeat;
     background-size: 146px 26px;
     background-image: url("../../../assets/images/logo.png");
-  }
-
-  img {
-    width: 130px;
+    cursor: pointer;
   }
 }
 
@@ -116,6 +128,10 @@ const handleClick = (tab: string, event: Event) => {
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
+}
+
+.demo-tabs ::v-deep .el-tabs__header {
+  margin: 0;
 }
 
 .nav {

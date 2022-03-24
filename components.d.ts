@@ -4,7 +4,9 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Banner: typeof import('./src/components/layout/discover/Banner.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
@@ -13,10 +15,15 @@ declare module 'vue' {
     GoTop: typeof import('./src/components/common/goTop.vue')['default']
     Header: typeof import('./src/components/layout/header/Header.vue')['default']
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']
+    Image: typeof import('./src/components/common/Image.vue')['default']
     Menu: typeof import('./src/components/layout/menu/Menu.vue')['default']
     MenuList: typeof import('./src/components/layout/menu/MenuList.vue')['default']
+    PlayList: typeof import('./src/components/common/playList.vue')['default']
     SearchPop: typeof import('./src/components/layout/header/SearchPop.vue')['default']
     SearchSuggest: typeof import('./src/components/layout/header/SearchSuggest.vue')['default']
+    SheetList: typeof import('./src/components/common/sheetList.vue')['default']
+    SongSheet: typeof import('./src/components/layout/discover/songSheet.vue')['default']
+    Title: typeof import('./src/components/common/Title.vue')['default']
     UserInfo: typeof import('./src/components/layout/header/UserInfo.vue')['default']
   }
 }

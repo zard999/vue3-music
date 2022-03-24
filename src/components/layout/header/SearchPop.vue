@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:15:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 14:27:33
+ * @LastEditTime: 2022-03-24 10:12:22
  * @FilePath: \music-item\src\components\layout\header\SearchPop.vue
  * @Description: 
  * 
@@ -11,7 +11,6 @@
 <template>
   <el-popover
     popper-style="max-width:auto;padding:0;"
-    v-model:visible="showSearchView"
     width="250px"
   >
     <template #reference>
@@ -19,8 +18,6 @@
         placeholder="搜索音乐、MV、歌单"
         :prefix-icon="Search"
         clearable
-        @focus="showSearchView = true"
-        @focusout="showSearchView = false"
       />
     </template>
     <div class="h-96">
