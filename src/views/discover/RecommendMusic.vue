@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 11:30:18
+ * @LastEditTime: 2022-03-26 11:29:31
  * @FilePath: \vue3-music\src\views\discover\RecommendMusic.vue
  * @Description: 推荐歌曲
  * 
@@ -17,7 +17,7 @@
       <div
         v-for="(item, index) in personalizedNewSong"
         :key="index"
-        class="hover-bg-view transition-all flex items-center"
+        class="cover hover-bg-view transition-all flex items-center"
         @click="play(item.id)"
       >
         <Image :picUrl="item.picUrl" />

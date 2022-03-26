@@ -2,9 +2,9 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:35:03
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 15:54:47
- * @FilePath: \music-item\src\components\layout\discover\songSheet.vue
- * @Description: 歌单
+ * @LastEditTime: 2022-03-26 14:41:45
+ * @FilePath: \vue3-music\src\components\layout\discover\songSheet.vue
+ * @Description: 发现页推荐歌单
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->
@@ -35,7 +35,7 @@
               </el-image>
             </div>
             <div class="count">
-               <IconPark :icon="Headset" class="mr-1" :size="14" />
+              <IconPark :icon="Headset" class="mr-1" :size="14" />
               <span>{{ tranNumber(item.playCount, 0) }}</span>
             </div>
           </div>
@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { tranNumber } from "@/utils/tools";
-import { LoadingOne,Headset } from "@icon-park/vue-next";
+import { LoadingOne, Headset } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
 const props = defineProps({
   sheetList: {

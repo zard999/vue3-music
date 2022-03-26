@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 12:08:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 20:18:20
+ * @LastEditTime: 2022-03-26 15:02:19
  * @FilePath: \vue3-music\src\utils\tools.ts
  * @Description: utils
  *
@@ -151,6 +151,11 @@ export const formatLyric = (lyric: string) => {
     return lyricItem;
   });
 };
+
+/** 返回指定类型的对象的键名数组 */
+export function keysOf<T>(obj: T) {
+  return Object.keys(obj) as (keyof T)[];
+}
 
 // export default {
 //   // localStorage存储

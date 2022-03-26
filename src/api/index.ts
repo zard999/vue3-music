@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 10:16:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 17:20:16
+ * @LastEditTime: 2022-03-26 15:49:50
  * @FilePath: \vue3-music\src\api\index.ts
  * @Description: api index
  *
@@ -16,6 +16,8 @@ import type { Singer } from "@/models/singer";
 import type { Song } from "@/models/song";
 import type { SongUrl } from "@/models/song_url";
 import type { ILyricResponse } from "@/models/Lyric/index";
+import type { TopListDetail } from "@/models/Rank/toplist_detail";
+import type { PlayListDetail, PlaylistHighqualityTag } from "@/models/SongList";
 
 // 轮播图
 export async function useBanner() {
@@ -72,4 +74,35 @@ export async function useLyric(id: number) {
     id,
   });
   return result;
+}
+
+// 获取排行榜
+export async function useTopListDetail() {
+  const { list } = await request.get<{ list: TopListDetail[] }>(
+    "/toplist/detail"
+  );
+  return list;
+}
+
+// 获取精品歌单
+export async function usePlaylistHighqualityTags() {
+  const { tags } = await request.get<{ tags: PlaylistHighqualityTag[] }>(
+    "playlist/highquality/tags"
+  );
+
+  return tags;
+}
+
+// 获取精品歌单
+export async function useTopPlaylistHighquality(params?: {
+  limit?: number;
+  before?: number;
+  cat: string;
+}) {
+  return await request.get<{
+    playlists: PlayListDetail[];
+    total: number;
+    more: boolean;
+    lasttime: number;
+  }>("top/playlist/highquality", params);
 }

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 11:06:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 15:22:04
+ * @LastEditTime: 2022-03-26 15:20:20
  * @FilePath: \vue3-music\src\components\layout\playerBar\PlayerAction.vue
  * @Description: 歌词和播放列表
  * 
@@ -43,6 +43,7 @@ import { storeToRefs } from "pinia";
 
 const { currentTime, duration, playListCount, showPlayList, showLyric } =
   storeToRefs(usePlayerStore());
+  
 </script>
 
 <style lang="scss"></style>

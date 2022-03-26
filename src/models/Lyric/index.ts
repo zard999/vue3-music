@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 17:03:11
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 17:03:11
+ * @LastEditTime: 2022-03-26 15:20:23
  * @FilePath: \vue3-music\src\models\Lyric\index.ts
  * @Description: 歌词
  *
@@ -34,3 +34,9 @@ export interface ILyricState {
   transLyric?: string /** 翻译歌词 */;
   transLyricUser?: IlyricUser /** 翻译歌词贡献者 */;
 }
+
+interface arr{
+ url: string,
+ id: number 
+}
+

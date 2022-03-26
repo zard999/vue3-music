@@ -5,8 +5,11 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Banner: typeof import('./src/components/layout/discover/Banner.vue')['default']
+    CoverPlay: typeof import('./src/components/common/CoverPlay.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBadge: typeof import('element-plus/es')['ElBadge']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
@@ -20,6 +23,7 @@ declare module 'vue' {
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']
     Image: typeof import('./src/components/common/Image.vue')['default']
     Iyric: typeof import('./src/components/common/Iyric.vue')['default']
+    Loading: typeof import('element-plus/es')['ElLoadingDirective']
     Menu: typeof import('./src/components/layout/menu/Menu.vue')['default']
     MenuList: typeof import('./src/components/layout/menu/MenuList.vue')['default']
     PlayerAction: typeof import('./src/components/layout/playerBar/PlayerAction.vue')['default']

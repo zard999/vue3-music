@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:50:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 10:30:40
+ * @LastEditTime: 2022-03-26 15:31:34
  * @FilePath: \vue3-music\src\router\routes.ts
  * @Description: 路由表
  *
@@ -63,11 +63,11 @@ export const appRouter = [
         },
       },
       {
-        path: "playlist",
-        name: Pages.playlist,
-        component: () => import("@/views/playlist/Playlist.vue"),
+        path: "songlist",
+        name: "songlist",
+        component: () => import("@/views/songlist/Songlist.vue"),
         meta: {
-          menu: "playlist",
+          menu: "songlist",
           keepAlive: true,
         },
       },

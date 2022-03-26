@@ -2,9 +2,9 @@
  * @Author: zyh
  * @Date: 2022-03-23 20:44:45
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 15:43:16
- * @FilePath: \music-item\src\components\layout\discover\Banner.vue
- * @Description: banner轮播图
+ * @LastEditTime: 2022-03-26 14:41:55
+ * @FilePath: \vue3-music\src\components\layout\discover\Banner.vue
+ * @Description: 发现页顶部banner轮播图
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->

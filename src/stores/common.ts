@@ -2,9 +2,9 @@
  * @Author: zyh
  * @Date: 2022-03-23 20:50:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 14:16:00
- * @FilePath: \music-item\src\stores\common.ts
- * @Description: banner store
+ * @LastEditTime: 2022-03-26 14:42:47
+ * @FilePath: \vue3-music\src\stores\common.ts
+ * @Description: 轮播图store
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */

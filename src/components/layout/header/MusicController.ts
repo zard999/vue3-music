@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 18:12:57
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 18:33:14
- * @FilePath: \music-item\src\components\layout\header\MusicController.ts
+ * @LastEditTime: 2022-03-26 15:29:53
+ * @FilePath: \vue3-music\src\components\layout\header\MusicController.ts
  * @Description: 音乐导航控制器
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -28,7 +28,7 @@ export function useMusicMenu() {
     },
     {
       label: "歌单",
-      name: "playlist",
+      name: "songlist",
     },
     {
       label: "歌手",

@@ -1,3 +1,4 @@
+/// 推荐歌单
 export interface Personalized {
   id: number;
   type: number;
@@ -12,6 +13,7 @@ export interface Personalized {
   alg: string;
 }
 
+// 推荐新歌
 export interface PersonalizedNewSong {
   id: number;
   type: number;
