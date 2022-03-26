@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 18:39:35
- * @FilePath: \music-item\src\views\discover\RecommendSongs.vue
+ * @LastEditTime: 2022-03-24 22:12:51
+ * @FilePath: \vue3-music\src\views\discover\RecommendSongs.vue
  * @Description: 推荐歌手
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
@@ -22,8 +22,11 @@
             >
               <template #placeholder>
                 <div class="image-slot">
-                  <IconPark :icon="LoadingOne" class="mr-1" :size="18" />
-                  <p>加载中<span class="dot">...</span></p>
+                  <IconPark
+                    :icon="LoadingOne"
+                    class="mr-1 ml-10 mt-10"
+                    :size="18"
+                  />
                 </div>
               </template>
             </el-image>
@@ -40,6 +43,8 @@
 
 <script setup lang="ts">
 import Title from "@/components/common/Title.vue";
+import { LoadingOne } from "@icon-park/vue-next";
+import IconPark from "@/components/common/IconPark.vue";
 import { useSingerStore } from "@/stores/singer";
 import { onMounted, toRefs } from "vue";
 

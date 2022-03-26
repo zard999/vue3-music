@@ -65,6 +65,7 @@ body {
   @apply m-0;
 }
 
+// 二行溢出
 .ellipsis-two {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -72,4 +73,34 @@ body {
   overflow: hidden;
   font-weight: 700;
   line-height: 18px;
+}
+
+@keyframes play {
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+
+	to {
+		-webkit-transform: translateY(85%);
+		transform: translateY(85%)
+	}
+}
+
+@keyframes turn{
+  0%{-webkit-transform:rotate(0deg);}
+  25%{-webkit-transform:rotate(90deg);}
+  50%{-webkit-transform:rotate(180deg);}
+  75%{-webkit-transform:rotate(270deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotateZ(-360deg)
+  }
+
+  100% {
+      transform: rotateZ(0deg)
+  }
 }

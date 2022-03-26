@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:09:36
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 10:54:03
- * @FilePath: \music-item\src\components\layout\header\Header.vue
+ * @LastEditTime: 2022-03-25 21:38:19
+ * @FilePath: \vue3-music\src\components\layout\header\Header.vue
  * @Description: 头部导航栏
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
@@ -19,7 +19,7 @@
         :size="iconSize"
         :stroke-width="2"
         class="icon-button"
-        @click="router.back(1)"
+        @click="router.back()"
       />
       <IconPark
         :icon="Right"

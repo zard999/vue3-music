@@ -2,13 +2,12 @@
  * @Author: zyh
  * @Date: 2022-03-23 11:13:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 14:55:41
- * @FilePath: \music-item\src\App.vue
+ * @LastEditTime: 2022-03-25 21:29:57
+ * @FilePath: \vue3-music\src\App.vue
  * @Description: App
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->
-<script setup lang="ts"></script>
 
 <template>
   <RouterView />
@@ -18,7 +17,25 @@
   <div class="fly bg-fly-circle4"></div>
 </template>
 
-<style lang="scss">
+<script setup lang="ts">
+import { userPlayerInit } from "@/stores/player";
+import { useRoute } from "vue-router";
+import { watch } from "vue";
+import PlayerBar from "@/components/layout/playerBar/index.vue";
+
+const route = useRoute();
+
+// 当参数更改时获取用户信息
+watch(
+  () => route.name,
+  () => {
+    console.log(route.meta);
+  }
+);
+userPlayerInit();
+</script>
+
+<style lang="scss" scoped>
 .fly {
   pointer-events: none;
   position: fixed;

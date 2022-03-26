@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 17:36:36
- * @FilePath: \music-item\src\views\discover\RecommendMusic.vue
+ * @LastEditTime: 2022-03-25 11:30:18
+ * @FilePath: \vue3-music\src\views\discover\RecommendMusic.vue
  * @Description: 推荐歌曲
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
@@ -18,13 +18,8 @@
         v-for="(item, index) in personalizedNewSong"
         :key="index"
         class="hover-bg-view transition-all flex items-center"
+        @click="play(item.id)"
       >
-        <!-- @click="play(item.id)" -->
-        <!-- <img
-          :src="item.picUrl"
-          alt=""
-          class="w-20 h-20 object-cover rounded flex-shrink-0"
-        /> -->
         <Image :picUrl="item.picUrl" />
         <div class="text-xs flex-auto flex justify-between items-center w-1/3">
           <div class="mx-4">
@@ -50,7 +45,9 @@ import Image from "@/components/common/Image.vue";
 import { onMounted, toRefs } from "vue";
 import { useMusicStore } from "@/stores/music";
 import { useFormatDuring } from "@/utils/tools";
+import { usePlayerStore } from "@/stores/player";
 
+const { play } = usePlayerStore();
 const { personalizedNewSong } = toRefs(useMusicStore());
 const { getPersonalizedNewSong } = useMusicStore();
 

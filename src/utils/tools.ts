@@ -2,13 +2,14 @@
  * @Author: zyh
  * @Date: 2022-03-24 12:08:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 17:24:18
- * @FilePath: \music-item\src\utils\tools.ts
+ * @LastEditTime: 2022-03-25 20:18:20
+ * @FilePath: \vue3-music\src\utils\tools.ts
  * @Description: utils
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 
+import type { ILyric } from "@/models/Lyric/song-lyric";
 /**
  * 数字转整数 如 100000 转为10万
  * @param {需要转化的数} num
@@ -91,6 +92,65 @@ export function useFormatDuring(during: number) {
 
   return ii + ":" + ss;
 }
+
+export function useFormatDuring2(during: number) {
+  const s = Math.floor(during) % 60;
+  during = Math.floor(during / 60);
+  const i = during % 60;
+
+  const ii = i < 10 ? `0${i}` : i;
+  const ss = s < 10 ? `0${s}` : s;
+
+  return ii + ":" + ss;
+}
+
+export function useNumberFormat(number: number): string | number {
+  if (number > 100000000) {
+    return Number((number / 100000000).toFixed(1)) + " 亿";
+  }
+
+  if (number > 10000000) {
+    return Number((number / 10000000).toFixed(1)) + " 千万";
+  }
+
+  if (number > 10000) {
+    return Number((number / 10000).toFixed(1)) + " 万";
+  }
+
+  return number;
+}
+
+/**
+ * 格式化时间字符串为时间，时间单位为秒
+ * @param timeString 时间字符串，格式为： mm:ss:ss, 如： 00:01:404
+ * @returns
+ */
+export const formatTimeToNumber = (timeString: string) => {
+  let time = 0;
+  if (timeString) {
+    const splitArr = timeString.split(":").map((item) => Number(item));
+    return splitArr[0] * 60 + splitArr[1];
+  }
+  return time;
+};
+
+/**
+ * 格式化歌词字符串为"时间-歌词"格式的数组
+ * @param lyric 歌词字符串
+ * @returns
+ */
+export const formatLyric = (lyric: string) => {
+  if (!lyric || lyric == undefined || lyric == null) return;
+  const lyricParts = lyric.split("\n").filter((item) => item);
+  return lyricParts.map((item) => {
+    const splitItems = item.split("]");
+    const lyricItem: ILyric = {
+      time: formatTimeToNumber(splitItems[0].slice(1)),
+      text: splitItems[1],
+    };
+    return lyricItem;
+  });
+};
 
 // export default {
 //   // localStorage存储

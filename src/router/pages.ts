@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:05:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 16:50:00
- * @FilePath: \music-item\src\router\pages.ts
+ * @LastEditTime: 2022-03-25 20:52:58
+ * @FilePath: \vue3-music\src\router\pages.ts
  * @Description: 路由页面
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -16,4 +16,5 @@ export const Pages = {
   singer: "singer", // 歌手
   video: "video", // 视频
   mv: "mvideo", // MV
+  login: "login", // 登录
 };
