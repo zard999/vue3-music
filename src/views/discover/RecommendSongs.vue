@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 22:12:51
+ * @LastEditTime: 2022-03-26 17:41:54
  * @FilePath: \vue3-music\src\views\discover\RecommendSongs.vue
  * @Description: 推荐歌手
  * 
@@ -14,7 +14,7 @@
     <div class="singer-list">
       <div class="singer-item" v-for="item in hotSinger" :key="item.id">
         <div class="cover">
-          <div class="image">
+          <div class="image cursor-pointer">
             <el-image
               :key="item.img1v1Url + '?param=200y200'"
               :src="item.img1v1Url + '?param=200y200'"

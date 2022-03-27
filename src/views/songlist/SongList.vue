@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-03-26 11:19:14
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 16:41:58
+ * @LastEditTime: 2022-03-26 17:44:29
  * @FilePath: \vue3-music\src\views\songlist\SongList.vue
  * @Description: 歌单
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->
 <template>
-  <PlaylistHot v-show="!loading" @cat-change="catChange" />
+  <PlaylistHot @cat-change="catChange" />
 
   <div class="py-5 text-xl">{{ pageData.cat }}歌单</div>
 
@@ -50,21 +50,6 @@
       >加载更多</el-button
     >
   </div>
-  <el-backtop>
-    <div
-      style="
-        height: 100%;
-        width: 100%;
-        background-color: #f2f5f6;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
-        text-align: center;
-        line-height: 40px;
-        color: #1989fa;
-      "
-    >
-      UP
-    </div>
-  </el-backtop>
 </template>
 
 <script setup lang="ts">
@@ -113,8 +98,8 @@ const getData = async () => {
       list.value?.push(...playlists);
     }
     pageData.init = true;
-    // pageData.loading = false;
-    loading.value = false;
+    pageData.loading = false;
+    // loading.value = false;
     pageData.before = lasttime;
     pageData.more = more;
   } catch (e) {}

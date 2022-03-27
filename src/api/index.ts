@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 10:16:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 15:49:50
+ * @LastEditTime: 2022-03-26 17:18:55
  * @FilePath: \vue3-music\src\api\index.ts
  * @Description: api index
  *
@@ -18,6 +18,7 @@ import type { SongUrl } from "@/models/song_url";
 import type { ILyricResponse } from "@/models/Lyric/index";
 import type { TopListDetail } from "@/models/Rank/toplist_detail";
 import type { PlayListDetail, PlaylistHighqualityTag } from "@/models/SongList";
+import type { Artist } from "@/models/artist";
 
 // 轮播图
 export async function useBanner() {
@@ -48,6 +49,24 @@ export async function useHotSinger() {
   const { artists } = await request.get<{ artists: Singer[] }>("/top/artists", {
     offset: 0,
     limit: 30,
+  });
+  return artists;
+}
+
+// 歌手分类列表
+export async function useSingerList(pageData: {
+  type: number;
+  area: number;
+  initial: string;
+  page: number;
+  limit: number;
+}) {
+  const { artists } = await request.get<{ artists: Artist[] }>("artist/list", {
+    type: pageData.type,
+    area: pageData.area,
+    initial: pageData.initial,
+    limit: pageData.limit,
+    offset: (pageData.page - 1) * pageData.limit,
   });
   return artists;
 }
