@@ -65,6 +65,14 @@ body {
   @apply m-0;
 }
 
+/* 文字控制显示 */
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 // 二行溢出
 .ellipsis-two {
   display: -webkit-box;

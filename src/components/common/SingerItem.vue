@@ -1,32 +1,53 @@
 <!--
  * @Author: zyh
- * @Date: 2022-03-24 11:18:37
+ * @Date: 2022-03-27 21:33:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-27 21:38:16
- * @FilePath: \vue3-music\src\views\discover\RecommendSongs.vue
- * @Description: 推荐歌手
+ * @LastEditTime: 2022-03-27 21:36:52
+ * @FilePath: \vue3-music\src\components\common\SingerItem.vue
+ * @Description: 歌手列表
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->
 <template>
-  <div class="mt-10 recommend-singer">
-    <Title :title="'推荐歌手'" />
-    <SingerItem :hotSinger="hotSinger" />
+  <div class="singer-list">
+    <div class="singer-item" v-for="item in hotSinger" :key="item.id">
+      <div class="cover">
+        <div class="image cursor-pointer" @click="toSingerDetail(item)">
+          <el-image
+            :key="item.img1v1Url + '?param=200y200'"
+            :src="item.img1v1Url + '?param=200y200'"
+            lazy
+          >
+            <template #placeholder>
+              <div class="image-slot">
+                <IconPark
+                  :icon="LoadingOne"
+                  class="mr-1 ml-10 mt-10"
+                  :size="18"
+                />
+              </div>
+            </template>
+          </el-image>
+        </div>
+      </div>
+      <div class="info">
+        <p class="name ellipsis">{{ item.name }}</p>
+        <p class="count" v-if="item.musicSize">单曲数{{ item.musicSize }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Title from "@/components/common/Title.vue";
+import { LoadingOne } from "@icon-park/vue-next";
+import IconPark from "@/components/common/IconPark.vue";
 import { useSingerStore } from "@/stores/singer";
-import { onMounted, toRefs } from "vue";
-import SingerItem from "@/components/common/SingerItem.vue";
 
-const { hotSinger } = toRefs(useSingerStore());
-const { getHotSinger } = useSingerStore();
+defineProps<{
+  hotSinger: any[];
+}>();
 
-onMounted(async () => {
-  await getHotSinger();
-});
+const { toSingerDetail } = useSingerStore();
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 09:57:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 20:13:07
+ * @LastEditTime: 2022-03-27 23:50:42
  * @FilePath: \vue3-music\src\stores\player.ts
  * @Description: 播放store
  *
@@ -97,7 +97,10 @@ export const usePlayerStore = defineStore({
 
     // 播放
     async play(id: number) {
-      if (id == this.id) return;
+      if (id == this.id) {
+        this.togglePlay();
+        return;
+      }
       this.isPlaying = false;
       const data = await useSongUrl(id);
       // 获取歌词
@@ -253,6 +256,11 @@ export const usePlayerStore = defineStore({
     // 当前播放歌曲的索引
     thisIndex: (state) => {
       return state.playList.findIndex((song) => song.id === state.id);
+    },
+
+    // 当前播放歌曲
+    thisSong: (state) => {
+      return state.playList.find((song) => song.id === state.id);
     },
 
     // 下一首歌曲

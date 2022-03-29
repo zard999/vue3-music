@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:58:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 17:41:48
+ * @LastEditTime: 2022-03-28 19:33:12
  * @FilePath: \vue3-music\src\views\singer\Singer.vue
  * @Description: 歌手
  * 
@@ -38,38 +38,7 @@
   <div
     class="grid grid-flow-row grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 singer-list"
   >
-    <div class="singer-item" v-for="artist in artists" :key="artist.id">
-      <div class="cover">
-        <div
-          class="image cursor-pointer"
-          @click="
-            router.push({ name: 'artistDetail', query: { id: artist.id } })
-          "
-        >
-          <el-image
-            :key="artist.img1v1Url + '?param=120y120'"
-            :src="artist.img1v1Url + '?param=120y120'"
-            lazy
-          >
-            <template #placeholder>
-              <div class="image-slot">
-                <IconPark
-                  :icon="LoadingOne"
-                  class="mr-1 ml-10 mt-10"
-                  :size="18"
-                />
-              </div>
-            </template>
-          </el-image>
-        </div>
-      </div>
-      <div class="info">
-        <p class="name ellipsis">{{ artist.name }}</p>
-        <p class="count" v-if="artist.musicSize">
-          单曲数{{ artist.musicSize }}
-        </p>
-      </div>
-    </div>
+    <SingerItem :hotSinger="artists" />
   </div>
   <div class="py-10">
     <el-button

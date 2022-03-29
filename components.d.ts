@@ -4,15 +4,26 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AlbumList: typeof import('./src/components/common/AlbumList.vue')['default']
+    ArtistList: typeof import('./src/components/common/ArtistList.vue')['default']
     Banner: typeof import('./src/components/layout/discover/Banner.vue')['default']
+    CommentBox: typeof import('./src/components/common/CommentBox.vue')['default']
+    CommentList: typeof import('./src/components/common/CommentList.vue')['default']
     CoverPlay: typeof import('./src/components/common/CoverPlay.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
+    ElDropdown: typeof import('element-plus/es')['ElDropdown']
+    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
+    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSlider: typeof import('element-plus/es')['ElSlider']
@@ -27,6 +38,7 @@ declare module 'vue' {
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     Menu: typeof import('./src/components/layout/menu/Menu.vue')['default']
     MenuList: typeof import('./src/components/layout/menu/MenuList.vue')['default']
+    MvList: typeof import('./src/components/common/MvList.vue')['default']
     PlayerAction: typeof import('./src/components/layout/playerBar/PlayerAction.vue')['default']
     PlayerBar: typeof import('./src/components/layout/playerBar/index.vue')['default']
     PlayerController: typeof import('./src/components/layout/playerBar/PlayerController.vue')['default']
@@ -39,11 +51,13 @@ declare module 'vue' {
     Scroll: typeof import('./src/components/common/scroll.vue')['default']
     SearchPop: typeof import('./src/components/layout/header/SearchPop.vue')['default']
     SearchSuggest: typeof import('./src/components/layout/header/SearchSuggest.vue')['default']
+    SingerItem: typeof import('./src/components/common/SingerItem.vue')['default']
     SongIyric: typeof import('./src/components/common/song-Iyric.vue')['default']
     SongLyric: typeof import('./src/components/common/SongLyric.vue')['default']
     SongSheet: typeof import('./src/components/layout/discover/songSheet.vue')['default']
     Title: typeof import('./src/components/common/Title.vue')['default']
     UserInfo: typeof import('./src/components/layout/header/UserInfo.vue')['default']
+    ZhCn: typeof import('./src/components/common/ZhCn.vue')['default']
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:09:36
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 21:38:19
+ * @LastEditTime: 2022-03-27 20:48:47
  * @FilePath: \vue3-music\src\components\layout\header\Header.vue
  * @Description: 头部导航栏
  * 
@@ -29,18 +29,6 @@
         @click="router.go(1)"
       />
     </div>
-
-    <!-- <div class="nav flex-row">
-      <div
-        class="nav-Item"
-        :class="{ active: currentIndex == index }"
-        v-for="(item, index) in navList.arrList"
-        :key="item.name"
-        @click="handlerRouter(item.name, index)"
-      >
-        {{ item.value }}
-      </div>
-    </div> -->
 
     <el-tabs
       v-model="currentMenu"

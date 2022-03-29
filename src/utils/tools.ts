@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 12:08:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 15:02:19
+ * @LastEditTime: 2022-03-28 18:24:11
  * @FilePath: \vue3-music\src\utils\tools.ts
  * @Description: utils
  *
@@ -50,8 +50,8 @@ export function formatZero(num: string | number, len: number) {
 }
 
 // 秒转00:00
-export function formatSecondTime(interval: number) {
-  interval = interval | 0;
+export function formatSecondTime(interval: number | string) {
+  interval = Number(interval) | 0;
   const m = (interval / 60) | 0;
   const s = interval % 60;
   return `${formatZero(m, 2)}:${formatZero(s, 2)}`;
@@ -78,6 +78,41 @@ export function formatTime(time: string | number) {
     formatTime = m + ":" + s;
   }
   return formatTime;
+}
+
+// 转换成秒
+export function formatSecond(time: string | number) {
+  // 取整
+  time = ~~time;
+  var secondTime;
+  if (time < 10) {
+    secondTime = "00:0" + time;
+  } else if (time < 60) {
+    secondTime = "00:" + time;
+  } else {
+    var m = ~~(time % (1000 * 60 * 60)) / (1000 * 60);
+    var s = ~~(time % (1000 * 60)) / 1000;
+    secondTime = Number(m * 60 + s);
+  }
+  return secondTime;
+}
+
+// 日期格式化
+export function dateFormat(str: string | number, type: string) {
+  let date = new Date(str);
+  let year = date.getFullYear();
+  let month = formatZero(date.getMonth() + 1, 2);
+  let day = formatZero(date.getDate(), 2);
+  let hour = formatZero(date.getHours(), 2);
+  let minute = formatZero(date.getMinutes(), 2);
+  let seconds = formatZero(date.getSeconds(), 2);
+  if (type == "YYYY-MM-DD") {
+    return `${year}-${month}-${day}`;
+  } else if (type == "YYYY-MM-DD HH:MM:SS") {
+    return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+  } else if (type == "MM/DD  HH:MM:SS") {
+    return `${month}/${day} ${hour}:${minute}:${seconds}`;
+  }
 }
 
 // 毫秒转分:秒
@@ -120,6 +155,37 @@ export function useNumberFormat(number: number): string | number {
   return number;
 }
 
+// 时间戳转换成几分钟前，几小时前，几天前
+export function formatMsgTime(dateTimeStamp: any) {
+  var result = "";
+  var minute = 1000 * 60;
+  var hour = minute * 60;
+  var day = hour * 24;
+  var month = day * 30;
+  var now = new Date().getTime();
+  var diffValue = now - dateTimeStamp;
+  if (diffValue < 0) return;
+  var monthC = diffValue / month;
+  var weekC = diffValue / (7 * day);
+  var dayC = diffValue / day;
+  var hourC = diffValue / hour;
+  var minC = diffValue / minute;
+  if (monthC >= 1) {
+    result = "" + parseInt(monthC.toString()) + "月前";
+  } else if (weekC >= 1) {
+    result = "" + parseInt(weekC.toString()) + "周前";
+  } else if (dayC >= 1) {
+    result = "" + parseInt(dayC.toString()) + "天前";
+  } else if (hourC >= 1) {
+    result = "" + parseInt(hourC.toString()) + "小时前";
+  } else if (minC >= 1) {
+    result = "" + parseInt(minC.toString()) + "分钟前";
+  } else {
+    result = "刚刚";
+  }
+  return result;
+}
+
 /**
  * 格式化时间字符串为时间，时间单位为秒
  * @param timeString 时间字符串，格式为： mm:ss:ss, 如： 00:01:404
@@ -157,6 +223,51 @@ export function keysOf<T>(obj: T) {
   return Object.keys(obj) as (keyof T)[];
 }
 
+// 处理歌手
+export function createSong(musicData: any) {
+  return {
+    id: musicData.id,
+    singer: filterSinger(musicData.ar || musicData.artists),
+    name: musicData.name,
+    album: musicData.al ? musicData.al.name : musicData.album.name,
+    duration: formatSecond(musicData.dt || musicData.duration),
+    image: musicData.al
+      ? musicData.al.picUrl
+      : musicData.album.artist.img1v1Url,
+    url: `https://music.163.com/song/media/outer/url?id=${musicData.id}.mp3`,
+    playCount: musicData.playCount || "",
+    score: musicData.score || "",
+  };
+}
+
+// 歌手处理
+function filterSinger(singer: any) {
+  let ret: any[] = [];
+  if (!singer) {
+    return "";
+  }
+  singer.map((item: { name: any }) => {
+    ret.push(item.name);
+  });
+  return ret.join(" / ");
+}
+
+// 处理MV
+export function createVideo(videoData: any) {
+  if (videoData.duration > 0) {
+    videoData.duration = formatTime(videoData.duration);
+  }
+  return {
+    id: videoData.id,
+    nickName: videoData.nickName,
+    name: videoData.name,
+    playCount: videoData.playCount,
+    duration: videoData.duration,
+    image: videoData.image,
+    isLive: videoData.isLive,
+  };
+}
+
 // export default {
 //   // localStorage存储
 //   setStore(name: string, content: any) {
@@ -177,23 +288,7 @@ export function keysOf<T>(obj: T) {
 //     if (!name) return;
 //     window.localStorage.removeItem(name);
 //   },
-//   // 日期格式化
-//   dateFormat(str: string, type: string) {
-//     let date = new Date(str);
-//     let year = date.getFullYear();
-//     let month = this.formatZero(date.getMonth() + 1, 2);
-//     let day = this.formatZero(date.getDate(), 2);
-//     let hour = this.formatZero(date.getHours(), 2);
-//     let minute = this.formatZero(date.getMinutes(), 2);
-//     let seconds = this.formatZero(date.getSeconds(), 2);
-//     if (type == "YYYY-MM-DD") {
-//       return `${year}-${month}-${day}`;
-//     } else if (type == "YYYY-MM-DD HH:MM:SS") {
-//       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-//     } else if (type == "MM/DD  HH:MM:SS") {
-//       return `${month}/${day} ${hour}:${minute}:${seconds}`;
-//     }
-//   },
+
 //   // 获取当前时间前后N天前后日期
 //   getDateBefore(dayCount: number) {
 //     var date = new Date();
@@ -205,52 +300,6 @@ export function keysOf<T>(obj: T) {
 //   },
 //   /**
 
-//   // 转换成秒
-//   formatSecond(time: string | number) {
-//     // 取整
-//     time = ~~time;
-//     var secondTime;
-//     if (time < 10) {
-//       secondTime = "00:0" + time;
-//     } else if (time < 60) {
-//       secondTime = "00:" + time;
-//     } else {
-//       var m = ~~(time % (1000 * 60 * 60)) / (1000 * 60);
-//       var s = ~~(time % (1000 * 60)) / 1000;
-//       secondTime = Number(m * 60 + s);
-//     }
-//     return secondTime;
-//   },
-//   // 时间戳转换成几分钟前，几小时前，几天前
-//   formatMsgTime(dateTimeStamp: number) {
-//     var result = "";
-//     var minute = 1000 * 60;
-//     var hour = minute * 60;
-//     var day = hour * 24;
-//     var month = day * 30;
-//     var now = new Date().getTime();
-//     var diffValue = now - dateTimeStamp;
-//     if (diffValue < 0) return;
-//     var monthC = diffValue / month;
-//     var weekC = diffValue / (7 * day);
-//     var dayC = diffValue / day;
-//     var hourC = diffValue / hour;
-//     var minC = diffValue / minute;
-//     if (monthC >= 1) {
-//       result = "" + monthC + "月前";
-//     } else if (weekC >= 1) {
-//       result = "" + weekC + "周前";
-//     } else if (dayC >= 1) {
-//       result = "" + dayC + "天前";
-//     } else if (hourC >= 1) {
-//       result = "" + hourC + "小时前";
-//     } else if (minC >= 1) {
-//       result = "" + minC + "分钟前";
-//     } else {
-//       result = "刚刚";
-//     }
-//     return result;
-//   },
 //   // 获取是几几后
 //   //   getAstro(timestamp: number) {
 //   //     let newDate = new Date();

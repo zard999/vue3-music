@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:50:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 15:31:34
+ * @LastEditTime: 2022-03-28 22:16:15
  * @FilePath: \vue3-music\src\router\routes.ts
  * @Description: 路由表
  *
@@ -14,14 +14,14 @@ import { Pages } from "./pages";
 /**
  * 404
  */
-export const pageError = {
-  path: "/:pathMatch(.*)*",
-  name: "404",
-  meta: {
-    title: "404-您访问的页面不存在",
-  },
-  component: () => import("@/views/error/404.vue"),
-};
+// export const pageError = {
+//   path: "/:pathMatch(.*)*",
+//   name: "404",
+//   meta: {
+//     title: "404-您访问的页面不存在",
+//   },
+//   component: () => import("@/views/error/404.vue"),
+// };
 
 // 登录路由
 export const loginRouter = [
@@ -98,8 +98,18 @@ export const appRouter = [
           keepAlive: true,
         },
       },
+      {
+        path: "/singerDetail",
+        name: "singerDetail",
+        component: () => import("@/views/singer/SingerDetail.vue"),
+      },
+      {
+        path: "/mvDetail",
+        name: "mvDetail",
+        component: () => import("@/views/mvideo/MVDetail.vue"),
+      },
     ],
   },
 ];
 
-export const routes = [...appRouter, ...loginRouter, pageError];
+export const routes = [...appRouter, ...loginRouter];
