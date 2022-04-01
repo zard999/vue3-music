@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 11:13:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 19:52:50
+ * @LastEditTime: 2022-04-01 15:53:26
  * @FilePath: \vue3-music\src\main.ts
  * @Description: main
  *
@@ -19,6 +19,7 @@ import "@/utils/extend";
 import VueKinesis from "vue-kinesis";
 // 国际化
 import ElementPlus from "element-plus";
+import 'element-plus/dist/index.css'
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 const app = createApp(App);

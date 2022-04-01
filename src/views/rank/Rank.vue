@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:58:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 16:51:03
+ * @LastEditTime: 2022-04-01 16:06:16
  * @FilePath: \vue3-music\src\views\rank\Rank.vue
  * @Description: 发现
  * 
@@ -17,6 +17,7 @@
       v-for="item in topListDetailData.slice(0, 4)"
       :key="item.id"
       class="cover flex bg-dc rounded-lg items-center cursor-pointer"
+      @click="toDetail(item)"
     >
       <CoverPlay
         :name="item.name"
@@ -50,6 +51,7 @@
         :pic-url="item.coverImgUrl"
         :play-count="item.playCount"
         class="cover"
+        @click="toDetail(item)"
       />
       <div class="text-sm mt-2 font-bold flex justify-center">
         {{ item.name }}
@@ -69,6 +71,16 @@ import type { TopListDetail } from "@/models/Rank/toplist_detail";
 const { topListDetailData } = toRefs(useMusicStore());
 const { getTopListDetailData } = useMusicStore();
 const router = useRouter();
+// 跟歌单是同一个
+const toDetail = (item: any) => {
+  let query = {
+    id: item.id,
+  };
+  router.push({
+    name: "songlistDetail",
+    query,
+  });
+};
 onMounted(async () => {
   await getTopListDetailData();
 });

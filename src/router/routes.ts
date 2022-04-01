@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:50:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 22:16:15
+ * @LastEditTime: 2022-03-31 22:24:25
  * @FilePath: \vue3-music\src\router\routes.ts
  * @Description: 路由表
  *
@@ -80,15 +80,15 @@ export const appRouter = [
           keepAlive: true,
         },
       },
-      {
-        path: "video",
-        name: Pages.video,
-        component: () => import("@/views/videoview/Video.vue"),
-        meta: {
-          menu: "video",
-          keepAlive: true,
-        },
-      },
+      // {
+      //   path: "video",
+      //   name: Pages.video,
+      //   component: () => import("@/views/videoview/Video.vue"),
+      //   meta: {
+      //     menu: "video",
+      //     keepAlive: true,
+      //   },
+      // },
       {
         path: "mvideo",
         name: "mvideo",
@@ -98,6 +98,7 @@ export const appRouter = [
           keepAlive: true,
         },
       },
+      // 歌手详情
       {
         path: "/singerDetail",
         name: "singerDetail",
@@ -107,6 +108,12 @@ export const appRouter = [
         path: "/mvDetail",
         name: "mvDetail",
         component: () => import("@/views/mvideo/MVDetail.vue"),
+      },
+      // 歌曲详情
+      {
+        path: "/songlistDetail",
+        name: "songlistDetail",
+        component: () => import("@/views/songlist/detail/index.vue"),
       },
     ],
   },

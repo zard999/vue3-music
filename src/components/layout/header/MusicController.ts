@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 18:12:57
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 15:29:53
+ * @LastEditTime: 2022-03-31 12:36:22
  * @FilePath: \vue3-music\src\components\layout\header\MusicController.ts
  * @Description: 音乐导航控制器
  *
@@ -34,10 +34,10 @@ export function useMusicMenu() {
       label: "歌手",
       name: "singer",
     },
-    {
-      label: "视频",
-      name: "video",
-    },
+    // {
+    //   label: "视频",
+    //   name: "video",
+    // },
     {
       label: "MV",
       name: "mvideo",

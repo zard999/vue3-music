@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-28 19:48:35
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-29 00:15:32
+ * @LastEditTime: 2022-03-31 17:48:09
  * @FilePath: \vue3-music\src\stores\login.ts
  * @Description: 登录 store
  *
@@ -117,7 +117,7 @@ export const useLoginStore = defineStore({
             createTime: res.createTime,
             createDays: res.createDays,
           };
-          window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
           // this.setUserInfo(res.profile);
           ElMessageBox({
             type: "success",

@@ -138,7 +138,7 @@ export const usePlayerStore = defineStore({
 
     // 详情
     async songDetail() {
-      this.song = await useSongDetail(this.id);
+      this.song = (await useSongDetail(this.id)).first();
 
       this.pushPlayList(false, this.song);
     },

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 20:48:22
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-27 23:44:48
+ * @LastEditTime: 2022-04-01 15:38:35
  * @FilePath: \vue3-music\src\components\common\ArtistList.vue
  * @Description: 全部播放和收藏没做
  * 
@@ -11,15 +11,19 @@
 <template>
   <div class="artist-box">
     <div class="tool-head">
-      <!-- @click="playAllSong" -->
+      <!-- @click="playAllSong" 播放全部 -->
       <div class="item play-item">
-        <i class="iconfont niceOutlined_Play"></i> 播放全部
+        <IconPark :icon="Play" class="mr-2" /> 播放全部
       </div>
-      <!-- @click="collect()" -->
-      <!-- :class="subscribed ? 'active' : ''" v-if="!isPerson" -->
-      <div class="item">
-        <i class="iconfont niceicon-heart"></i>
-        <!-- {{ collectText }} -->
+
+      <div
+        class="item"
+        @click="$emit('collectArtist')"
+        :class="subscribed ? 'active' : ''"
+        v-if="!isPerson"
+      >
+        <IconPark :icon="Like" class="mr-2" />
+        {{ subscribed ? "已收藏" : "收藏" }}
       </div>
       <!-- <div class="item" v-if="!isPerson">
         <i class="iconfont nicefenxiang1"></i> 分享
@@ -113,11 +117,14 @@
           <td>
             <div class="duration-container">
               <p>{{ formatSecondTime(item.duration) }}</p>
-              <div class="song-tools">
+              <!-- <div class="song-tools">
+                <IconPark class="icon" :icon="Like" />
+                <IconPark class="icon" :icon="Like" />
+                <IconPark class="icon" :icon="Like" />
                 <i class="iconfont niceicon-heart" title="喜欢"></i>
                 <i class="iconfont nicexiazai" title="下载"></i>
                 <i class="iconfont nicedot" title="更多"></i>
-              </div>
+              </div> -->
             </div>
           </td>
         </tr>
@@ -129,10 +136,10 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { usePlayerStore } from "@/stores/player";
-import { computed } from "vue";
 import { formatZero, formatSecondTime } from "@/utils/tools";
-import { Play,PauseOne } from "@icon-park/vue-next";
+import { Play, PauseOne } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
+import { Like } from "@icon-park/vue-next";
 const props = defineProps<{
   songs: Array<{
     id: number;
@@ -145,17 +152,13 @@ const props = defineProps<{
     playCount: number;
     score: any;
   }>;
-  // subscribed: Boolean;
+  subscribed: Boolean;
   isPerson: Boolean;
 }>();
 
 // 当前播放索引, 播放状态, 播放歌曲
 const { thisIndex, isPlaying, thisSong } = storeToRefs(usePlayerStore());
 const { play } = usePlayerStore();
-
-// const collectText = computed(() => {
-//   return props.subscribed ? "已收藏" : "收藏";
-// });
 </script>
 <style lang="scss" scoped>
 .artist-box >>> tbody img {
@@ -258,7 +261,7 @@ const { play } = usePlayerStore();
               width: 2px;
               height: 100%;
               margin-left: 2px;
-              background-color: #34d399;
+              background-color: #ff410f;
               animation: play 0.9s linear infinite alternate;
             }
           }

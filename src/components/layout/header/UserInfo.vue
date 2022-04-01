@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 15:19:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-29 23:38:00
+ * @LastEditTime: 2022-03-31 12:33:46
  * @FilePath: \vue3-music\src\components\layout\header\UserInfo.vue
  * @Description: 用户登录
  * 
@@ -17,26 +17,17 @@
     >
       <el-avatar class="avatar mr-4" :src="userInfo.avatarUrl"></el-avatar>
       <!-- @command="handleCommand" -->
-      <el-dropdown trigger="click" @command="handleCommand">
+
+      <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          {{ userInfo.nickname }}
-          <IconPark class="inline-block" :icon="Down" :size="16" />
-          <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
+          <el-icon class="el-icon--right"><arrow-down /></el-icon>
         </span>
-        <!-- <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item icon="el-icon-user" command="personal">
-            个人主页
-          </el-dropdown-item>
-          <el-dropdown-item icon="el-icon-medal">我的等级</el-dropdown-item>
-          <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-          <el-dropdown-item
-            divided
-            icon="el-icon-switch-button"
-            command="logout"
-          >
-            退出登录
-          </el-dropdown-item>
-        </el-dropdown-menu> -->
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item :icon="User">个人主页</el-dropdown-item>
+            <el-dropdown-item :icon="CircleClose">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </div>
     <div
@@ -54,7 +45,7 @@
 // import { useLoginStore } from "@/stores/login";
 // import { storeToRefs } from "pinia";
 import IconPark from "../../common/IconPark.vue";
-import { Down } from "@icon-park/vue-next";
+import { ArrowDown, CircleClose, User } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { logout } from "@/api/user";
 const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");

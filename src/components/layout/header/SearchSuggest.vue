@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:16:55
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-23 14:36:42
- * @FilePath: \music-item\src\components\layout\header\SearchSuggest.vue
+ * @LastEditTime: 2022-03-31 17:56:16
+ * @FilePath: \vue3-music\src\components\layout\header\SearchSuggest.vue
  * @Description: 
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
@@ -36,7 +36,7 @@
       :key="item.id"
       v-if="order === 'artists'"
       class="py-1.5 px-2.5 hover-bg-main text-xs cursor-pointer flex items-center"
-      @click="routerPush('artistDetail', item.id)"
+      @click="routerPush('singerDetail', item.id)"
     >
       <el-avatar size="small" :src="item.img1v1Url" />
       <span class="text-emerald-500 ml-2">{{ item.name }}</span>

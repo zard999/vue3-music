@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 10:16:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 17:42:43
+ * @LastEditTime: 2022-03-31 22:40:01
  * @FilePath: \vue3-music\src\api\index.ts
  * @Description: api index
  *
@@ -26,7 +26,9 @@ import type {
   SimilarSinger,
   hotAlbums,
 } from "@/models/singerDetail";
+import type { SearchHotDetail, SearchSuggest } from "@/models/search";
 import type { IMVideo } from "@/models/mvideo";
+import type { SonglistDetail } from "@/models/songlistDetail";
 
 // 轮播图
 export async function useBanner() {
@@ -80,11 +82,17 @@ export async function useSingerList(pageData: {
 }
 
 // 获取歌曲详情
-export async function useSongDetail(id: number) {
-  const { songs } = await request.get<{ songs: Song[] }>("/song/detail", {
-    ids: id,
-  });
-  return songs.first();
+export async function useSongDetail(
+  ids: number | string,
+  time: number = new Date().valueOf()
+) {
+  const { songs } = await request.get<{ songs: Song[] }>(
+    `/song/detail?timestamp=${time}`,
+    {
+      ids,
+    }
+  );
+  return songs;
 }
 
 // 获取音乐 url
@@ -297,3 +305,75 @@ export async function useMvComments(params: any) {
     comments: any;
   }>("/comment/mv", params);
 }
+
+// 搜索
+// 热搜列表(详细)
+export async function useSearchHotDetail() {
+  const { data } = await request.get<{ data: SearchHotDetail[] }>(
+    "search/hot/detail"
+  );
+  return data;
+}
+
+// 搜索建议
+export async function useSearchSuggest(keywords: string) {
+  const { result } = await request.get<{ result: SearchSuggest }>(
+    "search/suggest",
+    { keywords: keywords }
+  );
+  return result;
+}
+
+/**
+ * @method 获取歌单详情
+ * 必须登录
+ */
+
+export const getPlayListDetail = async (id: number, s: number, time: number) =>
+  await request.get<{ code: number; playlist: SonglistDetail }>(
+    `/playlist/detail?id=${id}&s=${s}&timestamp=${time}`,
+    {}
+  );
+
+/**
+ * @method 相关歌单推荐
+ */
+export const getRelatedPlaylist = async (id: number) =>
+  await request.get<{ code: number; playlists: any[] }>(
+    `/related/playlist?id=${id}`,
+    {}
+  );
+
+/**
+ * @method 歌单收藏者
+ * @params id 歌单 id
+ * @params limit 取出评论数量 默认为 20
+ * @params offset 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+ */
+export const getSubscribersPlaylist = async (params: any) =>
+  await request.get<{ code: number; subscribers: any[] }>(
+    `/playlist/subscribers`,
+    params
+  );
+
+/**
+ * @method 歌单评论
+ * @params id 歌单 id
+ * @params limit 取出评论数量 默认为 20
+ * @params offset 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+ * @params before 分页参数,取上一页最后一项的 time 获取下一页数据(获取超过5000条评论的时候需要用到)
+ */
+export const getCommentPlaylist = async (params: any) =>
+  await request.get<{ code: number; hotComments: any[]; comments: any }>(
+    `/comment/playlist`,
+    params
+  );
+
+/**
+ * @method 收藏/取消收藏歌单
+ */
+export const collectPlaylist = async (t: number, id: number) =>
+  await request.get<{ code: number }>(
+    `/playlist/subscribe?t=${t}&id=${id}`,
+    {}
+  );

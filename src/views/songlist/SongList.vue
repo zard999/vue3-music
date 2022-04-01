@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-26 11:19:14
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 17:44:29
+ * @LastEditTime: 2022-03-31 22:24:30
  * @FilePath: \vue3-music\src\views\songlist\SongList.vue
  * @Description: 歌单
  * 
@@ -26,7 +26,7 @@
       v-for="(item, index) in list"
       :key="index"
       :class="{ 'item-1': index === 0, cover: true }"
-      @click="router.push({ name: Pages.songlist, query: { id: item.id } })"
+      @click="router.push({ name: 'songlistDetail', query: { id: item.id } })"
     >
       <CoverPlay
         :name="item.name"
