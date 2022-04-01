@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 13:35:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-31 18:03:30
+ * @LastEditTime: 2022-04-01 17:33:41
  * @FilePath: \vue3-music\src\views\singer\SingerDetail.vue
  * @Description: 歌曲详情
  * 
@@ -67,7 +67,7 @@
         </ul>
         <div class="content">
           <!-- 作品 -->
-          <artist-list :songs="songs" :isPerson="isPerson" v-if="active == 1" />
+          <artist-list :subscribed="false" :songs="songs" :isPerson="isPerson" v-if="active == 1" />
           <!-- 专辑 -->
           <AlbumList :albums="albums" v-if="active == 2" />
           <!-- MV -->

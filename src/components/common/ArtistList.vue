@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 20:48:22
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 15:38:35
+ * @LastEditTime: 2022-04-01 18:18:46
  * @FilePath: \vue3-music\src\components\common\ArtistList.vue
  * @Description: 全部播放和收藏没做
  * 
@@ -104,19 +104,19 @@
           </td>
           <td>
             <div class="artist-container">
-              <p class="author ellipsis" :title="item.singer">
+              <p class="name ellipsis" :title="item.singer">
                 {{ item.singer }}
               </p>
             </div>
           </td>
           <td>
             <div class="album-container">
-              <p :title="item.album" class="ellipsis">{{ item.album }}</p>
+              <p :title="item.album" class="name ellipsis">{{ item.album }}</p>
             </div>
           </td>
           <td>
             <div class="duration-container">
-              <p>{{ formatSecondTime(item.duration) }}</p>
+              <p class="name">{{ formatSecondTime(item.duration) }}</p>
               <!-- <div class="song-tools">
                 <IconPark class="icon" :icon="Like" />
                 <IconPark class="icon" :icon="Like" />
@@ -137,9 +137,8 @@
 import { storeToRefs } from "pinia";
 import { usePlayerStore } from "@/stores/player";
 import { formatZero, formatSecondTime } from "@/utils/tools";
-import { Play, PauseOne } from "@icon-park/vue-next";
+import { Play, PauseOne, Like } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
-import { Like } from "@icon-park/vue-next";
 const props = defineProps<{
   songs: Array<{
     id: number;
@@ -163,6 +162,10 @@ const { play } = usePlayerStore();
 <style lang="scss" scoped>
 .artist-box >>> tbody img {
   border-radius: 5px;
+}
+
+.name {
+  width: 150px;
 }
 .artist-box {
   width: 100%;

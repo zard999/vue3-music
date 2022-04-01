@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:16:55
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-31 17:56:16
+ * @LastEditTime: 2022-04-01 18:22:57
  * @FilePath: \vue3-music\src\components\layout\header\SearchSuggest.vue
  * @Description: 
  * 
@@ -26,7 +26,7 @@
       :key="item.id"
       v-if="order === 'albums'"
       class="py-1.5 px-2.5 hover-bg-main text-xs cursor-pointer"
-      @click="routerPush('album', item.id)"
+      @click="routerPush('albumDetail', item.id)"
     >
       <span class="text-emerald-500">{{ item.name }}</span>
       <span class="pl-1"> - {{ item.artist.name }}</span>
@@ -46,7 +46,7 @@
       :key="item.id"
       v-if="order === 'playlists'"
       class="py-1.5 px-2.5 hover-bg-main text-xs cursor-pointer flex items-center"
-      @click="routerPush('playlist', item.id)"
+      @click="routerPush('songlistDetail', item.id)"
     >
       <el-avatar size="small" :src="item.coverImgUrl" />
       <div class="text-emerald-500 ml-2 truncate flex-1 w-1">

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 10:16:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-31 22:40:01
+ * @LastEditTime: 2022-04-01 17:56:58
  * @FilePath: \vue3-music\src\api\index.ts
  * @Description: api index
  *
@@ -29,6 +29,7 @@ import type {
 import type { SearchHotDetail, SearchSuggest } from "@/models/search";
 import type { IMVideo } from "@/models/mvideo";
 import type { SonglistDetail } from "@/models/songlistDetail";
+import type { IAlbum, ISongs } from "@/models/albumDetail";
 
 // 轮播图
 export async function useBanner() {
@@ -163,6 +164,15 @@ export async function useArtistAlbum(params: {
     params
   );
 }
+
+/**
+ * @method 获取专辑评论
+ */
+export const getAlbumComment = async (params: any) =>
+  request.get<{ code: number; hotComments: any[]; comments: any[] }>(
+    `/comment/album`,
+    params
+  );
 
 // 获取歌手MV
 export async function useArtistMv(params: {
@@ -375,5 +385,14 @@ export const getCommentPlaylist = async (params: any) =>
 export const collectPlaylist = async (t: number, id: number) =>
   await request.get<{ code: number }>(
     `/playlist/subscribe?t=${t}&id=${id}`,
+    {}
+  );
+
+/**
+ * @method 获取专辑内容
+ */
+export const getAlbumData = async (id: number) =>
+  await request.get<{ code: number; album: IAlbum; songs: ISongs[] }>(
+    `/album?id=${id}`,
     {}
   );

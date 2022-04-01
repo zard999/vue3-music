@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-31 21:07:40
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 15:54:03
+ * @LastEditTime: 2022-04-01 17:27:01
  * @FilePath: \vue3-music\src\stores\singlistDetail.ts
  * @Description:
  *

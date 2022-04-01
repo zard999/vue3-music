@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:50:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-31 22:24:25
+ * @LastEditTime: 2022-04-01 17:49:02
  * @FilePath: \vue3-music\src\router\routes.ts
  * @Description: 路由表
  *
@@ -114,6 +114,12 @@ export const appRouter = [
         path: "/songlistDetail",
         name: "songlistDetail",
         component: () => import("@/views/songlist/detail/index.vue"),
+      },
+      // 专辑详情
+      {
+        path: "/albumDetail",
+        name: "albumDetail",
+        component: () => import("@/views/album/albumDetail.vue"),
       },
     ],
   },
