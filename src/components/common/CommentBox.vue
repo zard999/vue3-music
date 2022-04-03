@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-28 17:33:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 17:39:43
+ * @LastEditTime: 2022-04-03 00:44:49
  * @FilePath: \vue3-music\src\components\common\CommentBox.vue
  * @Description: 
  * 
@@ -53,6 +53,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useLoginStore } from "@/stores/login";
+const { userInfo } = storeToRefs(useLoginStore());
 const props = defineProps<{
   currentCommentId: String;
   clearContent: Boolean;

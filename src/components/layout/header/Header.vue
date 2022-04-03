@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 14:09:36
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-27 20:48:47
+ * @LastEditTime: 2022-04-03 11:41:27
  * @FilePath: \vue3-music\src\components\layout\header\Header.vue
  * @Description: 头部导航栏
  * 
@@ -105,8 +105,8 @@ function toHome() {
     height: 64px;
     background-position: 0px center;
     background-repeat: no-repeat;
-    background-size: 146px 26px;
-    background-image: url("../../../assets/images/logo.png");
+    background-size: 146px 56px;
+    background-image: url("../../../assets/logo.png");
     cursor: pointer;
   }
 }
@@ -118,7 +118,7 @@ function toHome() {
   font-weight: 600;
 }
 
-.demo-tabs ::v-deep .el-tabs__header {
+.demo-tabs :deep(.el-tabs__header) {
   margin: 0;
 }
 

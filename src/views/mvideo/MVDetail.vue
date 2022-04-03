@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-28 15:24:44
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 19:20:44
+ * @LastEditTime: 2022-04-03 09:58:16
  * @FilePath: \vue3-music\src\views\mvideo\MVDetail.vue
  * @Description: MV详情
  * 
@@ -15,7 +15,7 @@
         <!-- controls="controls" -->
         <video
           :src="videoUrl"
-          controls="controls"
+          controls="true"
           autoplay
           controlslist="nodownload"
         ></video>

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 13:44:35
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 19:40:43
+ * @LastEditTime: 2022-04-02 22:43:13
  * @FilePath: \vue3-music\src\stores\singerDetail.ts
  * @Description: 歌手详情
  *
@@ -86,6 +86,33 @@ export const useSingerDetail = defineStore({
     isPerson: true,
   }),
   actions: {
+    // 初始化重置数据
+    reset() {
+      // 歌手基本信息
+      (this.singerDetail = {} as Artists),
+        // 歌手用户信息
+        (this.userDetail = { level: 0, followeds: 0, gender: 0 }),
+        // 歌手简介
+        (this.singerDesc = {} as singerDesc),
+        // 热门单曲
+        (this.songs = Array<{
+          id: number;
+          singer: string;
+          name: string;
+          album: any;
+          duration: string | number;
+          image: string;
+          url: string;
+          playCount: number;
+          score: any;
+        }>());
+      // 专辑
+      this.albums = Array<hotAlbums>();
+      // 相似歌手
+      this.singers = Array<SimilarSinger>();
+      // 歌手MV
+      this.mvs = Array<object>();
+    },
     // 切换歌手信息
     tabItem(id: number) {
       this.active = id;
@@ -219,14 +246,14 @@ export const useSingerDetail = defineStore({
     },
 
     //初始化
-    _initialize(id: number | string) {
+    async _initialize(id: number | string) {
       // 没起作用
       // this.initData();
       this.active = 1;
       this.albums = Array<hotAlbums>();
       this.mvs = [];
       this.singerId = Number(id);
-      this.getArtists(id);
+      await this.getArtists(id);
       this.getUserDetail(id);
       this.getArtistDesc(id);
       this.getArtistSimi(id);

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-04-01 16:49:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:25:20
+ * @LastEditTime: 2022-04-03 13:30:05
  * @FilePath: \vue3-music\src\stores\albumDetail.ts
  * @Description:
  *
@@ -17,7 +17,6 @@ import type { hotAlbums } from "@/models/singerDetail";
 import { ElMessageBox } from "element-plus";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
 
 export const useAlbumDetail = defineStore({
   id: "albumDetail",
@@ -28,6 +27,7 @@ export const useAlbumDetail = defineStore({
     subscribers: [],
     comments: Array<any>(),
     hotAlbums: Array<hotAlbums>(),
+    router: useRouter(),
   }),
   actions: {
     // // 修改artistId
@@ -103,7 +103,7 @@ export const useAlbumDetail = defineStore({
     },
     // 相关推荐详情
     toDetail(id: number) {
-      router.push({
+      this.router.push({
         name: "albumDetail",
         query: {
           id,

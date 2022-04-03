@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:50:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:49:02
+ * @LastEditTime: 2022-04-02 23:08:22
  * @FilePath: \vue3-music\src\router\routes.ts
  * @Description: 路由表
  *
@@ -109,7 +109,7 @@ export const appRouter = [
         name: "mvDetail",
         component: () => import("@/views/mvideo/MVDetail.vue"),
       },
-      // 歌曲详情
+      // 歌单详情
       {
         path: "/songlistDetail",
         name: "songlistDetail",

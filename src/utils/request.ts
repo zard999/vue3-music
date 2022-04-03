@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 20:55:19
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-24 10:47:07
- * @FilePath: \music-item\src\utils\request.ts
+ * @LastEditTime: 2022-04-01 22:33:04
+ * @FilePath: \vue3-music\src\utils\request.ts
  * @Description: 接口请求函数
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.

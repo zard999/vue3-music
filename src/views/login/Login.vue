@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:54:24
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-29 00:12:25
+ * @LastEditTime: 2022-04-03 13:58:05
  * @FilePath: \vue3-music\src\views\login\Login.vue
  * @Description: 登录
  * 
@@ -14,9 +14,9 @@
       <KinesisElement :parallaxStrength="4" type="depth">
         <div class="login-box">
           <div class="flex justify-center items-center">
-            <img src="../../assets/images/logo-a.png" class="nice-logo" />
+            <img src="../../assets/logo.png" class="nice-logo" />
           </div>
-          <p>NICEMUSIC</p>
+          <p>Zard-Music</p>
           <div class="login-form">
             <el-form
               ref="ruleFormRef"
@@ -30,7 +30,7 @@
                 <!-- 账号 -->
                 <el-form-item label="用户名" prop="user">
                   <el-input
-                    placeholder="请输入网易云音乐手机号"
+                    placeholder="请输入登录手机号"
                     v-model="ruleForm.user"
                     type="text"
                   />
@@ -113,9 +113,14 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useLoginStore } from "@/stores/login";
+import { onMounted } from "vue";
 
 const { ruleForm, rules, ruleFormRef } = storeToRefs(useLoginStore());
-const { login } = useLoginStore();
+const { login, init } = useLoginStore();
+
+onMounted(() => {
+  init();
+});
 // import { reactive, ref } from "vue";
 // import type { FormInstance } from "element-plus";
 
@@ -242,7 +247,7 @@ const { login } = useLoginStore();
       }
     }
     .nice-logo {
-      width: 55px;
+      width: 100px;
       margin: 40px 0 0px;
     }
     p {

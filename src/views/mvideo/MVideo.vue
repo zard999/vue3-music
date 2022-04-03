@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:58:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 15:58:35
+ * @LastEditTime: 2022-04-01 23:37:28
  * @FilePath: \vue3-music\src\views\mvideo\MVideo.vue
  * @Description: 发现
  * 
@@ -45,19 +45,29 @@
     <!-- <load-more @scroll-state="load"> -->
     <mv-list :mvs="mvs" type="mv"></mv-list>
     <!-- </load-more> -->
-    <div v-if="loading" class="load-bottom">
-      <nice-loading />
+    <div class="py-10">
+      <el-button
+        type="text"
+        class="text-center w-full"
+        :loading="videoLoading"
+        @click="load"
+        >加载更多</el-button
+      >
     </div>
+    <!-- <div v-if="loading" class="load-bottom">
+      <nice-loading />
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { createVideo } from "@/utils/tools";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useMvideoStore } from "@/stores/mvideo";
 import MvList from "@/components/common/MvList.vue";
-// import loadMore from "components/common/loadMore/Index";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+const { isLoading } = useGlobalStore();
 
 const {
   areaList,
@@ -66,14 +76,15 @@ const {
   classify,
   sortList,
   sort,
-
   mvs,
-  loading,
+  videoLoading,
 } = storeToRefs(useMvideoStore());
 const { getMvAll, chooseType, load } = useMvideoStore();
 
-onMounted(() => {
-  getMvAll();
+onMounted(async () => {
+  isLoading(true);
+  await getMvAll();
+  isLoading(false);
 });
 </script>
 <style lang="scss" scoped>

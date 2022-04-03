@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-04-01 16:48:14
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:53:22
+ * @LastEditTime: 2022-04-01 22:44:32
  * @FilePath: \vue3-music\src\views\album\albumDetail.vue
  * @Description: 专辑详情
  * 
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="content">
-        <artist-list :songs="songs" :isPerson="true" />
+        <artist-list :subscribed="false" :songs="songs" :isPerson="true" />
       </div>
     </div>
     <div class="right">

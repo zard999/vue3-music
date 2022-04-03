@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-03-24 22:12:11
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 21:40:26
+ * @LastEditTime: 2022-04-01 23:05:26
  * @FilePath: \vue3-music\src\views\footer\Footer.vue
  * @Description: 
  * 
  * Copyright (c) 2022 by 穿越, All Rights Reserved. 
 -->
 <template>
-  <div class="footer flex justify-center">
+  <div class="footer flex justify-center" v-if="!loading">
     <div class="copyright">
       <div class="container flex-column">
         <p>
@@ -23,7 +23,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+</script>
 <style lang="scss" scoped>
 .footer {
   width: 100%;

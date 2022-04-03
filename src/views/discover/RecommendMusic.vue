@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 11:29:31
+ * @LastEditTime: 2022-04-02 22:30:47
  * @FilePath: \vue3-music\src\views\discover\RecommendMusic.vue
  * @Description: 推荐歌曲
  * 
@@ -10,7 +10,7 @@
 -->
 <template>
   <div class="mt-10">
-    <Title :title="'推荐歌曲'" />
+    <Title :title="'推荐歌曲'" v-if="!loading" />
     <div
       class="grid grid-flow-row grid-cols-2 2xl:grid-cols-5 gap-y-2.5 gap-x-5 cursor-pointer"
     >
@@ -46,6 +46,9 @@ import { onMounted, toRefs } from "vue";
 import { useMusicStore } from "@/stores/music";
 import { useFormatDuring } from "@/utils/tools";
 import { usePlayerStore } from "@/stores/player";
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
 
 const { play } = usePlayerStore();
 const { personalizedNewSong } = toRefs(useMusicStore());

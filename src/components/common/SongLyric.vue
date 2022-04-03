@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 14:42:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 19:55:54
+ * @LastEditTime: 2022-04-03 11:07:32
  * @FilePath: \vue3-music\src\components\common\SongLyric.vue
  * @Description: 歌词
  * 
@@ -54,10 +54,11 @@ import { storeToRefs } from "pinia";
 import { usePlayerStore } from "@/stores/player";
 import { formatLyric } from "@/utils/tools";
 import type { IlyricUser } from "@/models/Lyric/index";
+import type { ILyric } from "@/models/Lyric/song-lyric";
 
 const props = defineProps<{
   lyric: string /** 歌曲歌词，为空字符串代表歌曲没有歌词 */;
-  transLyric?: string /** 翻译歌曲歌词，为空字符串代表歌曲没有歌词 */;
+  transLyric: string /** 翻译歌曲歌词，为空字符串代表歌曲没有歌词 */;
   lyricUser?: IlyricUser /** 歌词贡献者 */;
   transLyricUser?: IlyricUser /** 翻译歌词贡献者 */;
 }>();
@@ -82,8 +83,8 @@ const formatedLyrics = computed(() => {
   } else {
     const lyricList = formatLyric(props.lyric);
     const transLyricList = formatLyric(props.transLyric);
-    return lyricList.map((item) => {
-      const findResult = transLyricList.find(
+    return lyricList?.map((item) => {
+      const findResult = transLyricList?.find(
         (transItem) => item.time === transItem.time
       );
       if (findResult) {
@@ -113,18 +114,13 @@ watch(
   () => currentTime.value,
   (newTime, oldTime) => {
     if (newTime !== oldTime) {
+      let value = formatedLyrics.value as ILyric[];
       /** 获取比当前播放时间大的第一个元素 */
-      for (let i = 0; i < formatedLyrics.value.length; i++) {
-        if (
-          Math.floor(formatedLyrics.value[i].time) ===
-          Math.floor(currentTime.value)
-        ) {
+      for (let i = 0; i < value.length; i++) {
+        if (Math.floor(value[i].time) === Math.floor(currentTime.value)) {
           currentLyricIndex.value = i - 1;
           break;
-        } else if (
-          Math.floor(formatedLyrics.value[i].time) >
-          Math.floor(currentTime.value)
-        ) {
+        } else if (Math.floor(value[i].time) > Math.floor(currentTime.value)) {
           currentLyricIndex.value = i - 2;
           break;
         }

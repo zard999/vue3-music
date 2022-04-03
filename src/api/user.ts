@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 15:16:53
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:37:07
+ * @LastEditTime: 2022-04-01 18:29:30
  * @FilePath: \vue3-music\src\api\user.ts
  * @Description:
  *
@@ -37,6 +37,6 @@ export async function useLogin(user: number | string, pass: number | string) {
 }
 
 // 退出登录
-export async function logout() {
+export async function useLogout() {
   return await request.get<{ code: number | string }>(`/logout`);
 }

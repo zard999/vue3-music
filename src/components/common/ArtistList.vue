@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 20:48:22
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 18:18:46
+ * @LastEditTime: 2022-04-03 13:52:30
  * @FilePath: \vue3-music\src\components\common\ArtistList.vue
  * @Description: 全部播放和收藏没做
  * 
@@ -12,7 +12,7 @@
   <div class="artist-box">
     <div class="tool-head">
       <!-- @click="playAllSong" 播放全部 -->
-      <div class="item play-item">
+      <div class="item play-item" @click="playAllSong">
         <IconPark :icon="Play" class="mr-2" /> 播放全部
       </div>
 
@@ -134,11 +134,11 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import { usePlayerStore } from "@/stores/player";
 import { formatZero, formatSecondTime } from "@/utils/tools";
 import { Play, PauseOne, Like } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
+import { storeToRefs } from "pinia";
 const props = defineProps<{
   songs: Array<{
     id: number;
@@ -158,9 +158,14 @@ const props = defineProps<{
 // 当前播放索引, 播放状态, 播放歌曲
 const { thisIndex, isPlaying, thisSong } = storeToRefs(usePlayerStore());
 const { play } = usePlayerStore();
+
+// 播放全部
+const playAllSong = () => {
+  play(props.songs[0].id);
+};
 </script>
 <style lang="scss" scoped>
-.artist-box >>> tbody img {
+.artist-box :deep(tbody img) {
   border-radius: 5px;
 }
 
@@ -264,7 +269,7 @@ const { play } = usePlayerStore();
               width: 2px;
               height: 100%;
               margin-left: 2px;
-              background-color: #ff410f;
+              background-color: #34d399;
               animation: play 0.9s linear infinite alternate;
             }
           }

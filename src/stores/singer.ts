@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 18:22:39
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-27 19:51:45
+ * @LastEditTime: 2022-04-02 22:52:29
  * @FilePath: \vue3-music\src\stores\singer.ts
  * @Description: 热门歌手
  *
@@ -28,7 +28,7 @@ export const useSingerStore = defineStore("singer", () => {
     singer.value = item;
     console.log("跳转到歌手详情页", item.id);
 
-    router.push({ name: "singerDetail", query: { id: item.id } });
+    router.replace({ name: "singerDetail", query: { id: item.id } });
   };
   return {
     hotSinger,

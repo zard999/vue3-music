@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:18:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-27 21:38:16
+ * @LastEditTime: 2022-04-02 22:28:33
  * @FilePath: \vue3-music\src\views\discover\RecommendSongs.vue
  * @Description: 推荐歌手
  * 
@@ -10,7 +10,7 @@
 -->
 <template>
   <div class="mt-10 recommend-singer">
-    <Title :title="'推荐歌手'" />
+    <Title :title="'推荐歌手'" v-if="!loading" />
     <SingerItem :hotSinger="hotSinger" />
   </div>
 </template>
@@ -20,12 +20,16 @@ import Title from "@/components/common/Title.vue";
 import { useSingerStore } from "@/stores/singer";
 import { onMounted, toRefs } from "vue";
 import SingerItem from "@/components/common/SingerItem.vue";
-
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+const { isLoading } = useGlobalStore();
 const { hotSinger } = toRefs(useSingerStore());
 const { getHotSinger } = useSingerStore();
 
 onMounted(async () => {
   await getHotSinger();
+  isLoading(false);
 });
 </script>
 

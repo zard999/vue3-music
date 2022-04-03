@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:58:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 19:33:12
+ * @LastEditTime: 2022-04-01 23:17:48
  * @FilePath: \vue3-music\src\views\singer\Singer.vue
  * @Description: 歌手
  * 
@@ -35,30 +35,34 @@
       </div>
     </div>
   </div>
-  <div
-    class="grid grid-flow-row grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 singer-list"
-  >
-    <SingerItem :hotSinger="artists" />
-  </div>
-  <div class="py-10">
-    <el-button
-      type="text"
-      class="text-center w-full"
-      @click="loadMore"
-      :loading="pageData.loading"
-      >加载更多</el-button
+  <div class="content" v-loading="loading">
+    <div
+      class="grid grid-flow-row grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 singer-list"
     >
+      <SingerItem :hotSinger="artists" />
+    </div>
+    <div class="py-10" v-if="!loading">
+      <el-button
+        type="text"
+        class="text-center w-full"
+        @click="loadMore"
+        :loading="pageData.loading"
+        >加载更多</el-button
+      >
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, reactive, h } from "vue";
 import type { Artist } from "@/models/artist";
-import IconPark from "@/components/common/IconPark.vue";
-import { LoadingOne } from "@icon-park/vue-next";
 import { ElDivider } from "element-plus";
 import { useRouter } from "vue-router";
 import { useSingerList } from "@/api/index";
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+const { isLoading } = useGlobalStore();
 
 const spacer = h(ElDivider, { direction: "vertical" });
 const router = useRouter();
@@ -97,7 +101,11 @@ const loadMore = () => {
   pageData.page++;
   getData();
 };
-onMounted(getData);
+onMounted(async () => {
+  isLoading(true);
+  await getData();
+  isLoading(false);
+});
 
 const optionChange = (keyName: string, keyValue: number | string) => {
   console.log(keyName, keyValue);

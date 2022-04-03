@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-28 15:26:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-28 19:27:28
+ * @LastEditTime: 2022-04-01 23:33:18
  * @FilePath: \vue3-music\src\stores\mvideo.ts
  * @Description: mvideo store
  *
@@ -12,6 +12,7 @@ import { defineStore } from "pinia";
 import { useMv } from "@/api/index";
 import type { IMVideoData, Ret } from "@/models/mvideo";
 import { createVideo } from "@/utils/tools";
+import { ElMessage } from "element-plus";
 
 export const useMvideoStore = defineStore({
   id: "mvideo",
@@ -98,7 +99,7 @@ export const useMvideoStore = defineStore({
     },
     mvs: Array<IMVideoData | Ret>(),
     // 是否显示加载动画
-    loading: false,
+    videoLoading: false,
     // 是否还有数据
     loadStatus: true,
     en: "",
@@ -126,18 +127,17 @@ export const useMvideoStore = defineStore({
     async getMvAll() {
       //   this.fullscreenLoading = true;
       try {
-        this.loadStatus = false;
+        this.videoLoading = true;
         let res = await useMv(this.params);
         console.log(res);
 
         this.mvs = [...this.mvs, ...this._normalizeVideos(res.data)];
         if (res.hasMore) {
-          this.loading = true;
-          this.loadStatus = true;
           this.params.offset += 12;
         } else {
-          this.loading = false;
+          this.loadStatus = false;
         }
+        this.videoLoading = false;
       } catch (error) {
         // this.$message.error(error);
       }
@@ -164,9 +164,9 @@ export const useMvideoStore = defineStore({
     // 加载更多
     load() {
       if (this.loadStatus) {
-        setTimeout(() => {
-          this.getMvAll();
-        }, 1000);
+        this.getMvAll();
+      } else {
+        ElMessage.error("没有更多了！！");
       }
     },
   },

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-26 15:32:18
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 16:34:39
+ * @LastEditTime: 2022-04-02 23:36:08
  * @FilePath: \vue3-music\src\views\songlist\PlaylistHot.vue
  * @Description: 
  * 
@@ -30,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { usePlaylistHighqualityTags } from "@/api/index";
-import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import type { PlaylistHighqualityTag } from "@/models/SongList/index";
-
+const route = useRoute();
 const emit = defineEmits<{
   (e: "catChange", cat: string): void;
 }>();
@@ -46,12 +46,22 @@ const catClick = (cat: string, index: number) => {
 
 let currentIndex = ref(-1);
 
-const router = useRouter();
 const tags = ref<PlaylistHighqualityTag[]>();
 
 onMounted(async () => {
   tags.value = await usePlaylistHighqualityTags();
 });
+
+watch(
+  () => route.query.cat,
+  (cat) => {
+    console.log("hhh", route);
+    if (tags.value) {
+      const index = tags.value.findIndex((item) => item.name === cat);
+      currentIndex.value = index;
+    }
+  }
+);
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 20:44:45
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 14:41:55
+ * @LastEditTime: 2022-04-02 22:37:26
  * @FilePath: \vue3-music\src\components\layout\discover\Banner.vue
  * @Description: 发现页顶部banner轮播图
  * 
@@ -27,11 +27,16 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import { onMounted, toRefs } from "vue";
 import { useCommonStore } from "@/stores/common";
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+const { isLoading } = useGlobalStore();
 
 const { banners } = toRefs(useCommonStore());
 const { getBanners } = useCommonStore();
-onMounted(async () => {
-  await getBanners();
+onMounted(() => {
+  isLoading(true);
+  getBanners();
 });
 </script>
 

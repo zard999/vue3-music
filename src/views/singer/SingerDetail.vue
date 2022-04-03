@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-27 13:35:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:33:41
+ * @LastEditTime: 2022-04-03 11:43:10
  * @FilePath: \vue3-music\src\views\singer\SingerDetail.vue
  * @Description: 歌曲详情
  * 
@@ -65,7 +65,7 @@
             {{ item.name }}
           </li>
         </ul>
-        <div class="content">
+        <div class="content" v-loading="loading">
           <!-- 作品 -->
           <artist-list :subscribed="false" :songs="songs" :isPerson="isPerson" v-if="active == 1" />
           <!-- 专辑 -->
@@ -103,13 +103,16 @@ import ArtistList from "@/components/common/ArtistList.vue";
 import AlbumList from "@/components/common/AlbumList.vue";
 import MvList from "@/components/common/MvList.vue";
 import SingerItem from "@/components/common/SingerItem.vue";
-import { computed, watch } from "vue";
+import { computed, watch,onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useSingerDetail } from "@/stores/singerDetail";
 import { useSingerStore } from "@/stores/singer";
 import IconPark from "../../components/common/IconPark.vue";
 import { Male, Female,Level } from "@icon-park/vue-next";
+import { useGlobalStore } from "@/stores/global";
+const { loading } = storeToRefs(useGlobalStore());
+const { isLoading } = useGlobalStore();
 
 const route = useRoute();
 // const router = useRouter();
@@ -126,17 +129,22 @@ const {
   singers,
   detail,
 } = storeToRefs(useSingerDetail());
-const { _initialize, tabItem } = useSingerDetail();
+const { _initialize, tabItem,reset } = useSingerDetail();
 const { singer } = useSingerStore();
 
-// 初始化
-const init = () => {
+const init = async ()=>{
   let id = Number(route.query.id) || singer.id;
   if (id) {
-    _initialize(id);
+    isLoading(true)
+    await _initialize(id);
+    isLoading(false)
   }
-};
-init();
+}
+
+onMounted(() => {
+  reset()
+  init()
+})
 
 // // 合并歌手详情
 // const detail = computed(() => {
@@ -161,7 +169,7 @@ watch(
 );
 </script>
 <style lang="scss" scoped>
-.avatar >>> img {
+.avatar  :deep(img) {
   border-radius: 5px;
 }
 .singer-detail {

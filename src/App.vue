@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 11:13:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 21:29:57
+ * @LastEditTime: 2022-04-03 14:24:12
  * @FilePath: \vue3-music\src\App.vue
  * @Description: App
  * 
@@ -21,17 +21,9 @@
 import { userPlayerInit } from "@/stores/player";
 import { useRoute } from "vue-router";
 import { watch } from "vue";
-import PlayerBar from "@/components/layout/playerBar/index.vue";
 
 const route = useRoute();
 
-// 当参数更改时获取用户信息
-watch(
-  () => route.name,
-  () => {
-    console.log(route.meta);
-  }
-);
 userPlayerInit();
 </script>
 

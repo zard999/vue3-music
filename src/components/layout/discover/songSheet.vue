@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-24 11:35:03
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-26 14:41:45
+ * @LastEditTime: 2022-04-03 09:41:27
  * @FilePath: \vue3-music\src\components\layout\discover\songSheet.vue
  * @Description: 发现页推荐歌单
  * 
@@ -10,8 +10,8 @@
 -->
 <template>
   <div class="list">
-    <!-- @click="toDetail(item)" -->
     <div
+      @click="toDetail(item.id)"
       class="item"
       :class="numClass"
       v-for="item in sheetList"
@@ -22,8 +22,8 @@
           <div class="cover">
             <div class="image flex items-center justify-center">
               <el-image
-                :key="item.picUrl || item.coverImgUrl + '?param=300y300'"
-                :src="item.picUrl || item.coverImgUrl + '?param=300y300'"
+                :key="item.picUrl + '?param=300y300'"
+                :src="item.picUrl + '?param=300y300'"
                 lazy
               >
                 <template #placeholder>
@@ -55,13 +55,14 @@ import { computed } from "vue";
 import { tranNumber } from "@/utils/tools";
 import { LoadingOne, Headset } from "@icon-park/vue-next";
 import IconPark from "@/components/common/IconPark.vue";
+import { useRouter } from "vue-router";
+import type { Personalized } from "@/models/personalized";
+const router = useRouter();
 const props = defineProps({
   sheetList: {
-    type: Array,
-    default: () => [],
+    default: Array<Personalized>(),
   },
   num: {
-    type: Number,
     default: 8,
   },
 });
@@ -69,6 +70,15 @@ const props = defineProps({
 const numClass = computed(() => {
   return props.num == 2 ? "two" : "eight";
 });
+
+const toDetail = (id: number) => {
+  router.push({
+    name: "songlistDetail",
+    query: {
+      id: id,
+    },
+  });
+};
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-23 12:08:27
  * @LastEditors: zyh
- * @LastEditTime: 2022-03-25 20:58:00
+ * @LastEditTime: 2022-04-03 14:07:37
  * @FilePath: \vue3-music\src\router\index.ts
  * @Description: 路由表
  *

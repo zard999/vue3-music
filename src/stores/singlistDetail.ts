@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-31 21:07:40
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 17:27:01
+ * @LastEditTime: 2022-04-02 23:24:25
  * @FilePath: \vue3-music\src\stores\singlistDetail.ts
  * @Description:
  *
@@ -22,7 +22,6 @@ import { createSong } from "@/utils/tools";
 import { ElMessage, ElMessageBox } from "element-plus";
 import type { SonglistDetail, Creator } from "@/models/songlistDetail";
 
-const router = useRouter();
 export const useSinglistDetailStore = defineStore({
   id: "singlistDetail",
   state: () => ({
@@ -46,16 +45,19 @@ export const useSinglistDetailStore = defineStore({
     loading: false,
     // 是否是我喜欢的歌单
     ordered: false,
+    router: useRouter(),
   }),
   actions: {
+    // 重置
+    reset() {},
     // 修改artistId
     setArtistId(artistId: number) {
       this.artistId = artistId;
     },
     // 标签跳转
     tag(cat: any) {
-      router.push({
-        name: "playlist",
+      this.router.push({
+        name: "songlist",
         query: {
           cat,
         },
@@ -214,15 +216,15 @@ export const useSinglistDetailStore = defineStore({
     },
     // 相关推荐详情
     toDetail(id: number) {
-      router.push({
-        name: "playlistDetail",
+      this.router.push({
+        name: "songlistDetail",
         query: {
           id,
         },
       });
     },
     toUser(id: number) {
-      router.push({
+      this.router.push({
         name: "personal",
         query: {
           id,
@@ -230,11 +232,11 @@ export const useSinglistDetailStore = defineStore({
       });
     },
     // 初始化
-    _initialize(id: number) {
-      this.getPlayListDetail(id, 100);
-      this.getRelatedPlaylist(id);
-      this.getSubscribersPlaylist(id);
-      this.getCommentPlaylist(id);
+    async _initialize(id: number) {
+      await this.getPlayListDetail(id, 100);
+      await this.getRelatedPlaylist(id);
+      await this.getSubscribersPlaylist(id);
+      await this.getCommentPlaylist(id);
     },
   },
   getters: {},
