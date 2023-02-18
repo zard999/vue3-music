@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-03-23 20:55:19
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-01 22:33:04
- * @FilePath: \vue3-music\src\utils\request.ts
+ * @LastEditTime: 2023-02-18 11:14:33
+ * @FilePath: /vue3-music/src/utils/request.ts
  * @Description: 接口请求函数
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -11,7 +11,7 @@
 
 import axios, { type AxiosRequestConfig } from "axios";
 
-axios.defaults.baseURL = "/api";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.timeout = 10000;
 axios.defaults.maxBodyLength = 5 * 1024 * 1024;
 

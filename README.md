@@ -1,10 +1,5 @@
 [在线演示](http://42.192.151.130:3003/)
 
-## 依赖
-
-- Tailwind：Tailwind CSS 是一个功能类优先的 CSS 框架，它集成了诸如 flex, pt-4, text-center 和 rotate-90 这样的的类，它们能直接在脚本标记语言中组合起来，构建出任何设计。
-  - https://blog.csdn.net/wuovo233/article/details/117425047
-
 ## 页面结构
 
 - 首页（默认为发现音乐页）
@@ -18,6 +13,11 @@
 - 单个排行榜页面 (表格 Bug 未解决)
 - 单个歌单页面 （一样）
 - 单个专辑页面
+
+## electron 打包
+
+- win：yarn build:win
+- mac: yarn build:mac
 
 ## docker 部署
 

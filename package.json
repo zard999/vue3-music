@@ -2,9 +2,15 @@
   "name": "music-item",
   "private": true,
   "version": "0.0.0",
+  "author": "zyh",
+  "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
+    "dev:exe": "vite -m electron",
     "build": "vue-tsc --noEmit && vite build",
+    "build:electron": "vue-tsc --noEmit && vite build --mode electron",
+    "build:mac": "npm run build:electron && electron-builder --mac",
+    "build:win": "npm run build:electron && electron-builder --win",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"
   },
@@ -30,13 +36,68 @@
     "@vueuse/components": "^7.7.0",
     "@vueuse/core": "^7.7.0",
     "autoprefixer": "^10.4.2",
+    "electron": "^22.2.0",
+    "electron-builder": "^23.6.0",
     "postcss": "^8.4.7",
     "sass": "^1.49.9",
     "tailwindcss": "^3.0.23",
     "typescript": "~4.5.5",
     "unplugin-auto-import": "^0.6.1",
     "unplugin-vue-components": "^0.17.21",
-    "vite": "^2.8.4",
+    "vite": "^4.0.0",
+    "vite-plugin-electron": "^0.11.1",
     "vue-tsc": "^0.31.4"
+  },
+  "build": {
+    "appId": "com.vue3.music.zyh",
+    "productName": "vue3-music",
+    "copyright": "Copyright © 2023 ${author}",
+    "asar": false,
+    "extends": null,
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "directories": {
+      "output": "package"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "assets/icons/icon.ico"
+    },
+    "nsis": {
+      "language": 2052,
+      "allowElevation": true,
+      "installerHeader": "assets/icons/icon.ico",
+      "installerHeaderIcon": "assets/icons/icon.ico",
+      "uninstallerIcon": "assets/icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
   }
 }
