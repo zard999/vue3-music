@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-03-25 20:54:24
  * @LastEditors: zyh
- * @LastEditTime: 2022-04-03 13:58:05
+ * @LastEditTime: 2023-02-18 11:53:21
  * @FilePath: \vue3-music\src\views\login\Login.vue
  * @Description: 登录
  * 
@@ -16,7 +16,7 @@
           <div class="flex justify-center items-center">
             <img src="../../assets/logo.png" class="nice-logo" />
           </div>
-          <p>Zard-Music</p>
+          <p>Zard音乐播放器</p>
           <div class="login-form">
             <el-form
               ref="ruleFormRef"
@@ -53,8 +53,9 @@
                       class="login-btn"
                       type="primary"
                       @click="login(ruleFormRef)"
-                      >登录</el-button
                     >
+                      登录
+                    </el-button>
                   </div>
                 </div>
               </div>
@@ -111,16 +112,16 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useLoginStore } from "@/stores/login";
-import { onMounted } from "vue";
+import { storeToRefs } from 'pinia'
+import { useLoginStore } from '@/stores/login'
+import { onMounted } from 'vue'
 
-const { ruleForm, rules, ruleFormRef } = storeToRefs(useLoginStore());
-const { login, init } = useLoginStore();
+const { ruleForm, rules, ruleFormRef } = storeToRefs(useLoginStore())
+const { login, init } = useLoginStore()
 
 onMounted(() => {
-  init();
-});
+  init()
+})
 // import { reactive, ref } from "vue";
 // import type { FormInstance } from "element-plus";
 

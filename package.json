@@ -1,7 +1,7 @@
 {
   "name": "music-item",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "author": "zyh",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -49,8 +49,8 @@
     "vue-tsc": "^0.31.4"
   },
   "build": {
-    "appId": "com.vue3.music.zyh",
-    "productName": "vue3-music",
+    "appId": "vue3-music",
+    "productName": "Zard音乐播放器",
     "copyright": "Copyright © 2023 ${author}",
     "asar": false,
     "extends": null,
@@ -83,17 +83,16 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "msi"
+        "nsis"
       ],
-      "icon": "assets/icons/icon.ico"
+      "icon": "dist/electron/icons/icon.ico"
     },
     "nsis": {
       "language": 2052,
       "allowElevation": true,
-      "installerHeader": "assets/icons/icon.ico",
-      "installerHeaderIcon": "assets/icons/icon.ico",
-      "uninstallerIcon": "assets/icons/icon.ico",
+      "installerHeader": "dist/electron/icons/icon.ico",
+      "installerHeaderIcon": "dist/electron/icons/icon.ico",
+      "uninstallerIcon": "dist/electron/icons/icon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "allowToChangeInstallationDirectory": true,
