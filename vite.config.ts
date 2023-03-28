@@ -2,13 +2,14 @@
  * @Author: zyh
  * @Date: 2022-03-23 11:13:09
  * @LastEditors: zyh
- * @LastEditTime: 2023-02-18 11:21:53
+ * @LastEditTime: 2023-02-18 14:13:40
  * @FilePath: /vue3-music/vite.config.ts
  * @Description: vite配置文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import { fileURLToPath, URL } from 'url';
+import {resolve } from 'path';
 import { defineConfig, loadEnv, type ConfigEnv, type UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx'; // 通过 HMR 提供 Vue 3 JSX 和 TSX 支持。
@@ -37,7 +38,9 @@ const fn = (mode: ConfigEnv): UserConfig => {
       })
     );
   }
-
+  console.log('URL', new URL('./src', import.meta.url))
+  console.log('fileURLToPath', fileURLToPath(new URL('./src', import.meta.url)));
+  console.log('resolve',  resolve(__dirname, './src'))
   return {
     plugins,
     resolve: {

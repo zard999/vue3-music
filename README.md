@@ -1,4 +1,14 @@
-[在线演示](http://42.192.151.130:3003/)
+<!--
+ * @Author: zyh
+ * @Date: 2023-02-18 00:54:10
+ * @LastEditors: zyh
+ * @LastEditTime: 2023-03-28 10:26:39
+ * @FilePath: /vue3-music/README.md
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by 穿越, All Rights Reserved. 
+-->
+[在线演示](http://music.pointfree.cn/)
 
 ## 页面结构
 
@@ -44,3 +54,9 @@
 
 > 由于是本地打包的镜像，所以可能会有一些问题，如果有问题可以提 issue
 > 如果是在服务器上运行，记得打开 3003 和 3003 端口
+
+
+
+
+
+1. 
